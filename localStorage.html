@@ -7,6 +7,8 @@
   </head>
   <body>
     <button onclick="bottone()">Cliccami</button>
+    <button onclick="scriviInLog()">Cliccami</button>
+    
 
     <script>
 
@@ -16,15 +18,17 @@
         localStorage.setItem("etaMarco" , 70);
         localStorage.setItem("etaMario", 85);
 
-        let a = localStorage.getItem("etaMarco");
-        let b = localStorage.getItem("etaMario");
-
-        console.log();
-        console.log();
-
-        
       }
 
+
+    function scriviInLog() {
+        let marco = localStorage.getItem("etaMarco");
+        let mario = localStorage.getItem("etaMario");
+
+        
+        console.log(marco)
+        console.log(mario)
+      }
 
 
 
