@@ -1,0 +1,58 @@
+!Doctype>
+<html>
+<head>
+	<style>
+	.riquadri{
+	border: 9px outset orange;
+  background-color: black;    
+  text-align: center;
+	}
+	</style>
+</head>
+<body>
+<form id="form1" class="riquadri">
+<h1 style="color: white">Risolvi Equazione di 2° Grado</h1>
+<div>
+<label style="color:white" for="a">Inserisci:</label>
+<input type="number" id="a" placeholder=" aX^2">
+</div>
+<div>
+<label style="color:white" for="b">Inserisci:</label>
+<input type="number" id="b" placeholder="bX">
+</div>
+<div>
+<label style="color:white" for="c">Inserisci:</label>
+<input type="number" id="c" placeholder="c">
+</div>
+<br>
+<div>
+<button type="button" onclick="stampaSoluz()">Risolvi</button>
+</div>
+<br>
+</form>
+
+<div class="riquadri">
+	<h1 style="color: white" id="ciao"></h1>
+</div>
+<script>
+
+function stampaSoluz(){
+const a=Number(document.getElementById("a").value);
+const b=Number(document.getElementById("b").value);
+const c=Number(document.getElementById("c").value);
+console.log(a);
+console.log(b);
+console.log(c);
+let delta=b**2-a*c*4;
+console.log(delta);
+let soluz1=(-b+Math.sqrt(delta))/(a*2);
+console.log(soluz1);
+let soluz2=(-b-Math.sqrt(delta))/(a*2);
+console.log(soluz2);
+let paragrafo="soluzioni: x1= "+ soluz1 + " v x2= "+ soluz2;
+document.getElementById("ciao").innerHTML= paragrafo;
+}
+
+</script>
+</body>
+</html>
