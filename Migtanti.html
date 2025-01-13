@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TXT File Reader (CSV)</title>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+  <h1>Tabella Migranti</h1>
+  <input type="file" id="txtFileInput" accept=".txt" />
+  <div id="output"></div>
+
+  <script>
+    document.getElementById("txtFileInput").addEventListener("change", handleFile);
+
+    function handleFile(event) {
+      const file = event.target.files[0];
+      if (!file) {
+        alert("Please select a file!");
+        return;
+      }
+
+      const reader = new FileReader();
+
+      reader.onload = function (e) {
+        const text = e.target.result;
+
+        
+        const rows = text.split("\n");
+        const data = rows.map(row => row.split(",")); 
+
+        displayTable(data);
+      };
+
+      reader.readAsText(file);
+    }
+
+    function displayTable(data) {
+      const output = document.getElementById("output");
+      output.innerHTML = ""; 
+      if (data.length === 0) {
+        output.textContent = "Nessun dato trovato nel file!";
+        return;
+      }
+
+      const table = document.createElement("table");
+      const thead = document.createElement("thead");
+      const tbody = document.createElement("tbody");
+
+      
+      const headers = data[0]; 
+      const headerRow = document.createElement("tr");
+
+      
+      const annoHeader = document.createElement("th");
+      annoHeader.textContent = "Anno";
+      headerRow.appendChild(annoHeader);
+
+      headers.forEach(header => {
+        const th = document.createElement("th");
+        th.textContent = header.trim(); 
+        headerRow.appendChild(th);
+      });
+      thead.appendChild(headerRow);
+
+      
+      data.slice(1).forEach((row, index) => {
+        const tr = document.createElement("tr");
+
+        if (index === 0) {
+          const migrantiCell = document.createElement("td");
+          migrantiCell.textContent = "Migranti";
+          tr.appendChild(migrantiCell);
+        } else {
+          const emptyCell = document.createElement("td");
+          emptyCell.textContent = ""; 
+          tr.appendChild(emptyCell);
+        }
+
+        row.forEach(cell => {
+          const td = document.createElement("td");
+          td.textContent = cell.trim(); 
+          tr.appendChild(td);
+        });
+        tbody.appendChild(tr);
+      });
+
+      table.appendChild(thead);
+      table.appendChild(tbody);
+      output.appendChild(table);
+    }
+  </script>
+</body>
+</html>
