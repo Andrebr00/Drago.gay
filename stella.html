@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  <title>Confronto Stelle</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+      background: black;
+      color: white;
+      text-align: center;
+    }
+
+    h1 {
+      position: relative;
+      z-index: 10;
+      background: rgba(0, 0, 0, 0.5); 
+      padding: 10px 20px;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+
+    #container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      position: relative;
+    }
+
+    #myCanvas {
+      border: 1px solid #d3d3d3;
+      margin-top: 20px;
+    }
+
+    .labels {
+      display: flex;
+      justify-content: space-between;
+      width: 1000px;
+      margin-top: 10px;
+    }
+
+    .labels div {
+      text-align: center;
+      width: 50%;
+      font-weight: bold;
+    }
+
+    .space {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: black;
+      overflow: hidden;
+    }
+
+    .star {
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+      animation: moveStar 20s linear infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes moveStar {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) scale(0.5);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <h1>Confronto tra la mia stella e una creata da ChatGPT</h1>
+    <canvas id="myCanvas" width="1000" height="500"></canvas>
+    <div class="labels">
+      <div>La mia stella</div>
+      <div>ChatGPT</div>
+    </div>
+    <div class="space" id="space"></div>
+  </div>
+
+  <script>
+    const canvas = document.getElementById("myCanvas");
+    const ctx = canvas.getContext("2d");
+    const labels = document.querySelector(".labels");
+    const space = document.getElementById("space");
+
+    // Crea lo sfondo animato con le stelle
+    function createStar() {
+      const star = document.createElement("div");
+      star.classList.add("star");
+      const size = Math.random() * 3 + 1; // Dimensione casuale tra 1px e 4px
+      star.style.width = `${size}px`;
+      star.style.height = `${size}px`;
+      star.style.left = `${Math.random() * 100}vw`; // Posizione casuale sull'asse X
+      star.style.animationDuration = `${Math.random() * 5 + 5}s`; // Durata animazione
+      space.appendChild(star);
+
+      // Rimuovi la stella al termine dell'animazione
+      star.addEventListener("animationend", () => {
+        star.remove();
+      });
+    }
+
+    setInterval(createStar, 100);
+
+    function drawYourStar() {
+      ctx.beginPath();
+      ctx.strokeStyle = "white"; 
+
+      // Quadrante 1
+      ctx.moveTo(250, 0);
+      ctx.lineTo(175, 175);
+      ctx.moveTo(175, 175);
+      ctx.lineTo(0, 175);
+      ctx.moveTo(0, 175);
+      ctx.lineTo(125, 300);
+      // Quadrante 3
+      ctx.moveTo(125, 300);
+      ctx.lineTo(50, 500);
+      ctx.moveTo(50, 500);
+      ctx.lineTo(250, 400);
+      // Quadrante 4
+      ctx.moveTo(375, 300);
+      ctx.lineTo(450, 500);
+      ctx.moveTo(450, 500);
+      ctx.lineTo(250, 400);
+      // Quadrante 2
+      ctx.moveTo(250, 0);
+      ctx.lineTo(325, 175);
+      ctx.moveTo(325, 175);
+      ctx.lineTo(500, 175);
+      ctx.moveTo(500, 175);
+      ctx.lineTo(375, 300);
+
+      ctx.stroke(); // Disegna i contorni con le linee bianche
+    }
+
+    // Disegna la stella calcolata
+    function drawCalculatedStar(cx, cy, outerRadius, innerRadius, numPoints) {
+      const step = Math.PI / numPoints; // Angolo tra i punti
+      ctx.beginPath();
+
+      for (let i = 0; i < 2 * numPoints; i++) {
+        const angle = i * step - Math.PI / 2; // Rotazione iniziale
+        const radius = i % 2 === 0 ? outerRadius : innerRadius; // Alterna raggio esterno/interno
+        const x = cx + radius * Math.cos(angle);
+        const y = cy + radius * Math.sin(angle);
+        ctx.lineTo(x, y);
+      }
+
+      ctx.closePath();
+      ctx.strokeStyle = "red";
+      ctx.stroke();
+      ctx.fillStyle = "gold";
+      ctx.fill();
+    }
+
+    // Mostra entrambe le stelle al caricamento della pagina
+    window.onload = () => {
+      canvas.style.display = "block";
+      labels.style.display = "flex";
+      ctx.clearRect(0, 0, canvas.width, canvas.height); // Pulisce il canvas
+      drawYourStar(); // Disegna la tua stella con linee bianche
+      drawCalculatedStar(750, 250, 200, 80, 5); // Disegna la stella calcolata
+    };
+  </script>
+</body>
+</html>
