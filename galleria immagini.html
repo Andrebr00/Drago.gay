@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Galleria Immagini</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    img { max-height: 200px; }
+    .copy-btn { cursor: pointer; }
+  </style>
+</head>
+<body class="bg-gray-100 text-gray-900">
+  <div class="container mx-auto p-6">
+    <h1 class="text-3xl font-bold mb-6">Galleria Immagini</h1>
+    <div id="gallery" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
+  </div>
+
+  <script>
+    const imageNames = [
+      "example1.png",
+      "example2.png"
+    ];
+
+    const baseUrl = window.location.href.endsWith("/") ? window.location.href : window.location.href + "/";
+
+    const gallery = document.getElementById("gallery");
+    imageNames.forEach(name => {
+      const container = document.createElement("div");
+      container.className = "bg-white p-4 rounded shadow";
+
+      const img = document.createElement("img");
+      img.src = "img/" + name;
+      img.alt = name;
+      img.className = "mb-2 mx-auto";
+
+      const link = document.createElement("p");
+      const fullUrl = baseUrl + "img/" + name;
+      link.innerHTML = `<input type="text" class="w-full text-sm text-blue-600 underline cursor-pointer" value="${fullUrl}" readonly onclick="this.select();document.execCommand('copy');alert('Copiato!')" />`;
+
+      container.appendChild(img);
+      container.appendChild(link);
+      gallery.appendChild(container);
+    });
+  </script>
+</body>
+</html>
