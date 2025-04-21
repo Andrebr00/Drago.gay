@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Funko AI Store</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-900 text-white">
+  <!-- Pagina 1: Upload JSON -->
+  <div id="upload" class="p-10">
+    <h1 class="text-3xl font-bold mb-4">Carica il tuo file JSON</h1>
+    <input type="file" id="fileInput" accept=".txt,.json" class="text-black">
+    <p id="uploadStatus" class="mt-4 text-green-400"></p>
+  </div>
+
+  <!-- Pagina 2: Benvenuto -->
+  <div id="welcome" class="hidden p-10">
+    <h2 id="welcomeMessage" class="text-2xl font-semibold"></h2>
+    <button onclick="showCatalog()" class="mt-4 bg-purple-600 px-4 py-2 rounded">Vai al Catalogo</button>
+  </div>
+
+  <!-- Pagina 3: Catalogo -->
+  <div id="catalog" class="hidden grid grid-cols-2 md:grid-cols-4 gap-4 p-10"></div>
+
+  <!-- Pagina 4: Vetrina -->
+  <div id="showcase" class="hidden p-10"></div>
+
+  <!-- Pagina 5: Carrello -->
+  <div id="cart" class="hidden p-10">
+    <h2 class="text-2xl font-bold mb-4">Carrello</h2>
+    <ul id="cartItems" class="mb-4"></ul>
+    <button onclick="showReceipt()" class="bg-green-600 px-4 py-2 rounded">Concludi Acquisto</button>
+  </div>
+
+  <!-- Pagina 6: Scontrino -->
+  <div id="receipt" class="hidden p-10">
+    <h2 class="text-2xl font-bold mb-4">Scontrino</h2>
+    <div id="receiptContent"></div>
+  </div>
+
+  <script>
+    let jsonData, cart = [];
+
+    document.getElementById('fileInput').addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      const reader = new FileReader();
+
+      reader.onload = function(e) {
+        try {
+          jsonData = JSON.parse(e.target.result);
+          document.getElementById('upload').classList.add('hidden');
+          document.getElementById('welcome').classList.remove('hidden');
+          document.getElementById('welcomeMessage').innerText = `Benvenuto, ${jsonData.user.username}!`;
+        } catch (error) {
+          document.getElementById('uploadStatus').innerText = 'Errore: file JSON non valido.';
+        }
+      };
+
+      reader.readAsText(file);
+    });
+
+    function showCatalog() {
+      document.getElementById('welcome').classList.add('hidden');
+      const catalog = document.getElementById('catalog');
+      catalog.innerHTML = '';
+
+      jsonData.prodotti.forEach((product, index) => {
+        const card = document.createElement('div');
+        card.className = 'bg-gray-800 p-4 rounded shadow';
+        card.innerHTML = `
+          <h3 class="text-lg font-semibold">${product.marca} - ${product.modello}</h3>
+          <button onclick="showShowcase(${index})" class="mt-2 bg-blue-600 px-2 py-1 rounded">Dettagli</button>
+        `;
+        catalog.appendChild(card);
+      });
+
+      catalog.classList.remove('hidden');
+    }
+
+    function showShowcase(index) {
+      document.getElementById('catalog').classList.add('hidden');
+      const product = jsonData.prodotti[index];
+      const showcase = document.getElementById('showcase');
+
+      showcase.innerHTML = `
+        <h2 class="text-2xl font-bold mb-2">${product.marca} - ${product.modello}</h2>
+        <img src="${product.immagine}" alt="${product.modello}" class="w-60 mb-4">
+        <ul class="mb-4">
+          ${Object.entries(product.descrizione).map(([key, value]) => `<li>${key}: ${value}</li>`).join('')}
+        </ul>
+        <button onclick="addToCart(${index})" class="bg-yellow-500 px-4 py-2 rounded">Aggiungi al Carrello</button>
+      `;
+      showcase.classList.remove('hidden');
+    }
+
+    function addToCart(index) {
+      cart.push(jsonData.prodotti[index]);
+      alert('Aggiunto al carrello!');
+      document.getElementById('showcase').classList.add('hidden');
+      showCatalog();
+    }
+
+    function showCart() {
+      document.getElementById('catalog').classList.add('hidden');
+      const cartItems = document.getElementById('cartItems');
+      cartItems.innerHTML = '';
+      cart.forEach(item => {
+        const li = document.createElement('li');
+        li.innerText = `${item.marca} - ${item.modello}`;
+        cartItems.appendChild(li);
+      });
+      document.getElementById('cart').classList.remove('hidden');
+    }
+
+    function showReceipt() {
+      document.getElementById('cart').classList.add('hidden');
+      const receiptContent = document.getElementById('receiptContent');
+      receiptContent.innerHTML = `
+        <p><strong>Cliente:</strong> ${jsonData.user.username}</p>
+        <p><strong>Indirizzo:</strong> ${jsonData.user.indirizzo}, ${jsonData.user.citta}, ${jsonData.user.cap}</p>
+        <ul class="my-4">
+          ${cart.map(item => `<li>${item.marca} - ${item.modello}</li>`).join('')}
+        </ul>
+        <p><strong>Totale prodotti:</strong> ${cart.length}</p>
+      `;
+      document.getElementById('receipt').classList.remove('hidden');
+    }
+  </script>
+</body>
+</html>
