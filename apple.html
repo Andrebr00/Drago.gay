@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>apple</title>
+  <title>Funko Pop</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -20,7 +20,7 @@
       font-weight: bold;
     }
 
-    .phones-container {
+    .products-container {
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
@@ -28,18 +28,18 @@
       padding: 30px;
     }
 
-    .phone {
+    .product {
       text-align: center;
       cursor: pointer;
       width: 200px;
     }
 
-    .phone img {
+    .product img {
       width: 150px;
       height: auto;
     }
 
-    .phone div {
+    .product div {
       margin-top: 10px;
       font-weight: bold;
     }
@@ -47,40 +47,41 @@
 </head>
 <body>
   <div class="header">
-    Apple
+    Funko Pop
   </div>
 
-  <div class="phones-container" id="phonesContainer">
-   
+  <div class="products-container" id="productsContainer">
   </div>
 
   <script>
-    let telefoni = JSON.parse(localStorage.getItem('telefoni'));
-    let phonesContainer = document.getElementById('phonesContainer');
-    let applePhones = telefoni.filter(function(t) { return t.marca === 'Apple'; });
+    let prodotti = JSON.parse(localStorage.getItem('prodotti'));
+    let productsContainer = document.getElementById('productsContainer');
 
-    applePhones.forEach(function(phone) {
-      let phoneElement = document.createElement('div');
-      phoneElement.classList.add('phone');
-      phoneElement.setAttribute('onclick', 'vaiAllaPaginaTelefono("' + phone.nome + '")');
+    // filtro solo i Funko Pop
+    let funkoPop = prodotti.filter(function(p) { return p.categoria === 'Funko Pop'; });
 
-      let phoneImg = document.createElement('img');
-      phoneImg.src = phone.imgUrl;
-      phoneImg.alt = phone.nome;
+    funkoPop.forEach(function(prodotto) {
+      let productElement = document.createElement('div');
+      productElement.classList.add('product');
+      productElement.setAttribute('onclick', 'vaiAllaPaginaDettaglio("' + prodotto.nome + '")');
 
-      let phoneNome = document.createElement('div');
-      phoneNome.innerText = phone.nome;
+      let productImg = document.createElement('img');
+      productImg.src = prodotto.imgUrl;
+      productImg.alt = prodotto.nome;
 
-      phoneElement.appendChild(phoneImg);
-      phoneElement.appendChild(phoneNome);
-      phonesContainer.appendChild(phoneElement);
+      let productNome = document.createElement('div');
+      productNome.innerText = prodotto.nome;
+
+      productElement.appendChild(productImg);
+      productElement.appendChild(productNome);
+      productsContainer.appendChild(productElement);
     });
 
-    function vaiAllaPaginaTelefono(nomeTelefono) {
-      let telefono = telefoni.find(function(t) { return t.nome === nomeTelefono; });
-      if (telefono) {
-        localStorage.setItem('telefono', JSON.stringify(telefono));
-        window.location.href = 'Dettagli.html';  
+    function vaiAllaPaginaDettaglio(nomeProdotto) {
+      let prodotto = prodotti.find(function(p) { return p.nome === nomeProdotto; });
+      if (prodotto) {
+        localStorage.setItem('prodotto', JSON.stringify(prodotto));
+        window.location.href = 'Dettagli.html';
       }
     }
   </script>
