@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HomeE-commerce</title>
+  <title>Home E-commerce</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -25,7 +25,7 @@
       font-size: 20px;
     }
 
-    .marche-container {
+    .categorie-container {
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
@@ -33,18 +33,18 @@
       padding: 30px;
     }
 
-    .marca {
+    .categoria {
       text-align: center;
       cursor: pointer;
     }
 
-    .marca img {
+    .categoria img {
       width: 110px;
       height: 110px;
       object-fit: contain;
     }
 
-    .marca div {
+    .categoria div {
       margin-top: 10px;
       font-weight: bold;
     }
@@ -61,49 +61,50 @@
     Benvenuto <span id="nomeUtente"></span>
   </div>
 
-  <div class="marche-container" id="marcheContainer">
+  <div class="categorie-container" id="categorieContainer">
   </div>
 
   <script>
     let userData = JSON.parse(localStorage.getItem('datiUtente'));
-    let telefoni = JSON.parse(localStorage.getItem('telefoni'));
+    let prodotti = JSON.parse(localStorage.getItem('prodotti'));
 
     if (userData && userData.nome) {
       document.getElementById('nomeUtente').innerText = userData.nome;
     }
 
-    // Lista marche da mostrare: solo Samsung e Apple
-    let marche = ["Apple", "Samsung"];
+    // Lista categorie da mostrare
+    let categorie = ["Funko Pop", "Action Figure"];
 
-    let marcheContainer = document.getElementById('marcheContainer');
+    let categorieContainer = document.getElementById('categorieContainer');
 
-    let marcheImages = {
-      "Apple":   "https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg",
-      "Samsung": "https://images.samsung.com/is/image/samsung/assets/global/about-us/brand/logo/mo/256_144_2.png?$512_N_PNG$"
+    let categorieImages = {
+      "Funko Pop": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Funko_Logo.png/320px-Funko_Logo.png",
+      "Action Figure": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/GIJoeLogo.svg/320px-GIJoeLogo.svg.png"
     };
 
-    for (let j = 0; j < marche.length; j++) {
-      let marca = marche[j];
+    for (let j = 0; j < categorie.length; j++) {
+      let categoria = categorie[j];
 
-      let marcaElement = document.createElement('div');
-      marcaElement.classList.add('marca');
-      marcaElement.setAttribute('onclick', 'vaiAllaMarca("' + marca + '")');
+      let categoriaElement = document.createElement('div');
+      categoriaElement.classList.add('categoria');
+      categoriaElement.setAttribute('onclick', 'vaiAllaCategoria("' + categoria + '")');
 
-      let marcaImg = document.createElement('img');
-      marcaImg.src = marcheImages[marca];
-      marcaImg.alt = marca;
+      let categoriaImg = document.createElement('img');
+      categoriaImg.src = categorieImages[categoria];
+      categoriaImg.alt = categoria;
 
-      let marcaNome = document.createElement('div');
-      marcaNome.innerText = marca;
+      let categoriaNome = document.createElement('div');
+      categoriaNome.innerText = categoria;
 
-      marcaElement.appendChild(marcaImg);
-      marcaElement.appendChild(marcaNome);
-      marcheContainer.appendChild(marcaElement);
+      categoriaElement.appendChild(categoriaImg);
+      categoriaElement.appendChild(categoriaNome);
+      categorieContainer.appendChild(categoriaElement);
     }
 
-    function vaiAllaMarca(marca) {
-      localStorage.setItem('marca', marca);
-      window.location.href = marca.toLowerCase() + '.html';
+    function vaiAllaCategoria(categoria) {
+      localStorage.setItem('categoria', categoria);
+      window.location.href = categoria.replace(/\s+/g, '').toLowerCase() + '.html';
+      // Esempio: "Funko Pop" --> "funkopop.html"
     }
   </script>
 </body>
