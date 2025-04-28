@@ -32,16 +32,23 @@
       text-align: center;
       cursor: pointer;
       width: 200px;
+      transition: transform 0.2s;
+    }
+
+    .product:hover {
+      transform: scale(1.05);
     }
 
     .product img {
       width: 150px;
-      height: auto;
+      height: 150px;
+      object-fit: contain;
     }
 
     .product div {
       margin-top: 10px;
       font-weight: bold;
+      font-size: 16px;
     }
   </style>
 </head>
@@ -57,13 +64,17 @@
     let prodotti = JSON.parse(localStorage.getItem('prodotti'));
     let productsContainer = document.getElementById('productsContainer');
 
-    // filtro solo i Funko Pop
-    let funkoPop = prodotti.filter(function(p) { return p.categoria === 'Funko Pop'; });
+    // filtro solo i prodotti della categoria "Funko Pop"
+    let funkoPop = prodotti.filter(function(p) {
+      return p.categoria === 'Funko Pop';
+    });
 
     funkoPop.forEach(function(prodotto) {
       let productElement = document.createElement('div');
       productElement.classList.add('product');
-      productElement.setAttribute('onclick', 'vaiAllaPaginaDettaglio("' + prodotto.nome + '")');
+      productElement.onclick = function() {
+        vaiAllaPaginaDettaglio(prodotto.nome);
+      };
 
       let productImg = document.createElement('img');
       productImg.src = prodotto.imgUrl;
@@ -78,10 +89,12 @@
     });
 
     function vaiAllaPaginaDettaglio(nomeProdotto) {
-      let prodotto = prodotti.find(function(p) { return p.nome === nomeProdotto; });
+      let prodotto = prodotti.find(function(p) {
+        return p.nome === nomeProdotto;
+      });
       if (prodotto) {
         localStorage.setItem('prodotto', JSON.stringify(prodotto));
-        window.location.href = 'Dettagli.html';
+        window.location.href = 'Dettagli.html'; // vai alla pagina di dettaglio
       }
     }
   </script>
