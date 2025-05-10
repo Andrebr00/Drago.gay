@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="it">
+<html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> Registrazione</title>
+  <title>Registrazione</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -93,168 +93,167 @@
 
   <script>
     const telefoni = [
-  {
-    "marca": "Samsung",
-    "nome": "Samsung Galaxy S25 Ultra",
-    "ram": "12 GB",
-    "memoria": "512 GB",
-    "fotocamera": "200 MP principale, 12 MP ultra-grandangolare, 10 MP teleobiettivo, 10 MP periscopico",
-    "frequenza": "120 Hz",
-    "prezzo": "€1.619",
-    "imgUrl": "https://www.samsung.com/etc/designs/smg/global/imgs/support/cont/galaxy-s25-ultra.png"
-  },
-  {
-    "marca": "Samsung",
-    "nome": "Samsung Galaxy S25+",
-    "ram": "12 GB",
-    "memoria": "512 GB",
-    "fotocamera": "50 MP principale, 12 MP ultra-grandangolare, 10 MP teleobiettivo",
-    "frequenza": "120 Hz",
-    "prezzo": "€1.299",
-    "imgUrl": "https://www.samsung.com/etc/designs/smg/global/imgs/support/cont/galaxy-s25-plus.png"
-  },
-  {
-    "marca": "Samsung",
-    "nome": "Samsung Galaxy S25",
-    "ram": "8 GB",
-    "memoria": "256 GB",
-    "fotocamera": "50 MP principale, 12 MP ultra-grandangolare, 10 MP teleobiettivo",
-    "frequenza": "120 Hz",
-    "prezzo": "€999",
-    "imgUrl": "https://www.samsung.com/etc/designs/smg/global/imgs/support/cont/galaxy-s25.png"
-  },
-  {
-    "marca": "Samsung",
-    "nome": " Samsung Galaxy Z Fold 5",
-    "ram": "12 GB",
-    "memoria": "512 GB",
-    "fotocamera": "50 MP principale, 12 MP ultra-grandangolare, 10 MP teleobiettivo",
-    "frequenza": "120 Hz",
-    "prezzo": "€1.799",
-    "imgUrl": "https://www.samsung.com/etc/designs/smg/global/imgs/support/cont/galaxy-z-fold-5.png"
-  },
-  {
-    "marca": "Apple",
-    "nome": "iPhone 15 Pro Max",
-    "ram": "8 GB",
-    "memoria": "512 GB",
-    "fotocamera": "48 MP principale, 12 MP ultra-grandangolare, 12 MP teleobiettivo",
-    "frequenza": "120 Hz",
-    "prezzo": "€1.689",
-    "imgUrl": "https://www.apple.com/v/iphone-17/home/b/images/overview/hero/hero_endframe__d72z3wjlziwm_large.jpg"
-  },
-  {
-    "marca": "Apple",
-    "nome": "iPhone 15 Pro",
-    "ram": "8 GB",
-    "memoria": "512 GB",
-    "fotocamera": "48 MP principale, 12 MP ultra-grandangolare, 12 MP teleobiettivo",
-    "frequenza": "120 Hz",
-    "prezzo": "€1.589",
-    "imgUrl": "https://www.apple.com/v/iphone-17/home/b/images/overview/hero/hero_endframe__clpjyfsb8eqm_large.jpg"
-  },
-  {
-    "marca": "Apple",
-    "nome": "iPhone 15 Plus",
-    "ram": "6 GB",
-    "memoria": "512 GB",
-    "fotocamera": "48 MP principale, 12 MP ultra-grandangolare",
-    "frequenza": "120 Hz",
-    "prezzo": "€1.349",
-    "imgUrl": "https://www.apple.com/v/iphone-17/home/b/images/overview/hero/hero_endframe__d72z3wjlziwm_large.jpg"
-  },
-  {
-    "marca": "Apple",
-    "nome": "iPhone 15",
-    "ram": "6 GB",
-    "memoria": "512 GB",
-    "fotocamera": "48 MP principale, 12 MP ultra-grandangolare",
-    "frequenza": "120 Hz",
-    "prezzo": "€1.249",
-    "imgUrl": "https://www.apple.com/v/iphone-17/home/b/images/overview/hero/hero_endframe__clpjyfsb8eqm_large.jpg"
-  },
-  {
-    "marca": "Xiaomi",
-    "nome": "Xiaomi 15 Ultra",
-    "ram": "16 GB",
-    "memoria": "512 GB",
-    "fotocamera": "50 MP quadrupla Leica (principale, ultra-grandangolare, teleobiettivo, periscopico)",
-    "frequenza": "120 Hz",
-    "prezzo": "€1.199",
-    "imgUrl": "https://www.mi.com/global/wp-content/uploads/2023/02/01_Mi-13-Pro_Mobile-01_1.jpg"
-  },
-  {
-    "marca": "Xiaomi",
-    "nome": "Xiaomi 15 Pro",
-    "ram": "12 GB",
-    "memoria": "512 GB",
-    "fotocamera": "50 MP tripla Leica",
-    "frequenza": "120 Hz",
-    "prezzo": "€999",
-    "imgUrl": "https://www.mi.com/global/wp-content/uploads/2023/02/Xiaomi-13-5G-Design.jpg"
-  },
-  {
-    "marca": "Xiaomi",
-    "nome": "Xiaomi 15",
-    "ram": "12 GB",
-    "memoria": "512 GB",
-    "fotocamera": "50 MP tripla",
-    "frequenza": "120 Hz",
-    "prezzo": "€899",
-    "imgUrl": "https://www.mi.com/global/wp-content/uploads/2023/02/Xiaomi-13-5G-Design.jpg"
-  },
-  {
-    "marca": "Xiaomi",
-    "nome": "Xiaomi 14 Ultra",
-    "ram": "12 GB",
-    "memoria": "512 GB",
-    "fotocamera": "50 MP quadrupla Leica",
-    "frequenza": "120 Hz",
-    "prezzo": "€1.099",
-    "imgUrl": "https://www.mi.com/global/wp-content/uploads/2023/02/01_Mi-13-Pro_Mobile-01_1.jpg"
-  },
-  {
-    "marca": "Huawei",
-    "nome": "Huawei Mate 70 RS Ultimate Design",
-    "ram": "16 GB",
-    "memoria": "512 GB",
-    "fotocamera": "50 MP tripla Leica",
-    "frequenza": "120 Hz",
-    "prezzo": "€1.599",
-    "imgUrl": "https://consumer.huawei.com/content/dam/huawei-consumer/global/pdp/phones/mate50pro/black-mate50pro.png"
-  },
-  {
-    "marca": "Huawei",
-    "nome": "Huawei Mate 70 Pro+",
-    "ram": "16 GB",
-    "memoria": "512 GB",
-    "fotocamera": "50 MP tripla",
-    "frequenza": "120 Hz",
-    "prezzo": "€1.399",
-    "imgUrl": "https://consumer.huawei.com/content/dam/huawei-consumer/global/pdp/phones/p50pro/p50pro/p50-pro-gal-1.jpg"
-  },
-  {
-    "marca": "Huawei",
-    "nome": "Huawei Mate 70 Pro",
-    "ram": "12 GB",
-    "memoria": "512 GB",
-    "fotocamera": "50 MP tripla",
-    "frequenza": "120 Hz",
-    "prezzo": "€1.199",
-    "imgUrl": "https://consumer.huawei.com/content/dam/huawei-consumer/global/pdp/phones/p50pro/p50pro/p50-pro-gal-1.jpg"
-  },
-  {
-    "marca": "Huawei",
-    "nome": "Huawei Mate 70",
-    "ram": "12 GB",
-    "memoria": "512 GB",
-    "fotocamera": "50 MP doppia",
-    "frequenza": "120 Hz",
-    "prezzo": "€999",
-    "imgUrl": "https://consumer.huawei.com/content/dam/huawei-consumer/global/pdp/phones/p50pro/p50pro/p50-pro-gal-1.jpg"
-  }
-]
-;
+      {
+        "marca": "Samsung",
+        "nome": "Samsung Galaxy S25 Ultra",
+        "ram": "12 GB",
+        "memoria": "512 GB",
+        "fotocamera": "200 MP principale, 12 MP ultra-grandangolare, 10 MP teleobiettivo, 10 MP periscopico",
+        "frequenza": "120 Hz",
+        "prezzo": "€1619",
+        "imgUrl": "https://img.tuttoandroid.net/wp-content/uploads/2025/01/Samsung-Galaxy-S25-Ultra-tag.png"
+      },
+      {
+        "marca": "Samsung",
+        "nome": "Samsung Galaxy S25+",
+        "ram": "12 GB",
+        "memoria": "512 GB",
+        "fotocamera": "50 MP principale, 12 MP ultra-grandangolare, 10 MP teleobiettivo",
+        "frequenza": "120 Hz",
+        "prezzo": "€1299",
+        "imgUrl": "https://static.comet.it/b2c/public/e-cat/SAM08063E/SAM08063E-2c146d3309-0.jpg"
+      },
+      {
+        "marca": "Samsung",
+        "nome": "Samsung Galaxy S25",
+        "ram": "8 GB",
+        "memoria": "256 GB",
+        "fotocamera": "50 MP principale, 12 MP ultra-grandangolare, 10 MP teleobiettivo",
+        "frequenza": "120 Hz",
+        "prezzo": "€999",
+        "imgUrl": "https://media.ldlc.com/r374/ld/products/00/06/20/57/LD0006205731.jpg"
+      },
+      {
+        "marca": "Samsung",
+        "nome": "Samsung Galaxy Z Fold 5",
+        "ram": "12 GB",
+        "memoria": "512 GB",
+        "fotocamera": "50 MP principale, 12 MP ultra-grandangolare, 10 MP teleobiettivo",
+        "frequenza": "120 Hz",
+        "prezzo": "€1799",
+        "imgUrl": "https://www.smartworld.it/images/2023/07/21/samsung-galaxy-z-fold-5-scheda-tecnica-orig.png"
+      },
+      {
+        "marca": "Apple",
+        "nome": "iPhone 15 Pro Max",
+        "ram": "8 GB",
+        "memoria": "512 GB",
+        "fotocamera": "48 MP principale, 12 MP ultra-grandangolare, 12 MP teleobiettivo",
+        "frequenza": "120 Hz",
+        "prezzo": "€1689",
+        "imgUrl": "https://m.media-amazon.com/images/I/815eN0AS-CL._AC_SL1500_.jpg"
+      },
+      {
+        "marca": "Apple",
+        "nome": "iPhone 15 Pro",
+        "ram": "8 GB",
+        "memoria": "512 GB",
+        "fotocamera": "48 MP principale, 12 MP ultra-grandangolare, 12 MP teleobiettivo",
+        "frequenza": "120 Hz",
+        "prezzo": "€1589",
+        "imgUrl": "https://files.refurbed.com/ii/iphone-15-pro-1694588677.jpg"
+      },
+      {
+        "marca": "Apple",
+        "nome": "iPhone 15 Plus",
+        "ram": "6 GB",
+        "memoria": "512 GB",
+        "fotocamera": "48 MP principale, 12 MP ultra-grandangolare",
+        "frequenza": "120 Hz",
+        "prezzo": "€1349",
+        "imgUrl": "https://files.refurbed.com/ii/iphone-15-plus-1694600365.jpg"
+      },
+      {
+        "marca": "Apple",
+        "nome": "iPhone 15",
+        "ram": "6 GB",
+        "memoria": "512 GB",
+        "fotocamera": "48 MP principale, 12 MP ultra-grandangolare",
+        "frequenza": "120 Hz",
+        "prezzo": "€1249",
+        "imgUrl": "https://cf6.certideal.com/32932-prod_large/iphone-15-128-gb-verde.jpg"
+      },
+      {
+        "marca": "Xiaomi",
+        "nome": "Xiaomi 15 Ultra",
+        "ram": "16 GB",
+        "memoria": "512 GB",
+        "fotocamera": "50 MP quadrupla Leica (principale, ultra-grandangolare, teleobiettivo, periscopico)",
+        "frequenza": "120 Hz",
+        "prezzo": "€1199",
+        "imgUrl": "https://www.multibrandproject.it/pimages/Xiaomi-15-Ultra-512Gb-16Gb-RAM-5G-Dual-Sim-White-EU-extra-big-19111-071.jpg"
+      },
+      {
+        "marca": "Xiaomi",
+        "nome": "Xiaomi 15 Pro",
+        "ram": "12 GB",
+        "memoria": "512 GB",
+        "fotocamera": "50 MP tripla Leica",
+        "frequenza": "120 Hz",
+        "prezzo": "€999",
+        "imgUrl": "https://img.tuttoandroid.net/wp-content/uploads/2024/10/Xiaomi-15-Pro-Verde-460x460.png"
+      },
+      {
+        "marca": "Xiaomi",
+        "nome": "Xiaomi 15",
+        "ram": "12 GB",
+        "memoria": "512 GB",
+        "fotocamera": "50 MP tripla",
+        "frequenza": "120 Hz",
+        "prezzo": "€899",
+        "imgUrl": "https://cdn.beebom.com/mobile/xiaomi-15-front-and-back-1-356w.webp"
+      },
+      {
+        "marca": "Xiaomi",
+        "nome": "Xiaomi 14 Ultra",
+        "ram": "12 GB",
+        "memoria": "512 GB",
+        "fotocamera": "50 MP quadrupla Leica",
+        "frequenza": "120 Hz",
+        "prezzo": "€1099",
+        "imgUrl": "https://m.media-amazon.com/images/I/51XJHAjKJmL._AC_SL1001_.jpg"
+      },
+      {
+        "marca": "Huawei",
+        "nome": "Huawei Mate 70 RS Ultimate Design",
+        "ram": "16 GB",
+        "memoria": "512 GB",
+        "fotocamera": "50 MP tripla Leica",
+        "frequenza": "120 Hz",
+        "prezzo": "€1599",
+        "imgUrl": "https://it.etoren.com/upload/images/0.60267800_1732846246_huawei-mate-70-rs-ultimate-5g-plu-al10-dual-sim-512gb-black-16gb-ram-china-version.jpg"
+      },
+      {
+        "marca": "Huawei",
+        "nome": "Huawei Mate 70 Pro+",
+        "ram": "16 GB",
+        "memoria": "512 GB",
+        "fotocamera": "50 MP tripla",
+        "frequenza": "120 Hz",
+        "prezzo": "€1399",
+        "imgUrl": "https://cdn.kalvo.com/uploads/img/large/67077-huawei-mate-70-pro-plus.jpg"
+      },
+      {
+        "marca": "Huawei",
+        "nome": "Huawei Mate 70 Pro",
+        "ram": "12 GB",
+        "memoria": "512 GB",
+        "fotocamera": "50 MP tripla",
+        "frequenza": "120 Hz",
+        "prezzo": "€1199",
+        "imgUrl": "https://cdn.kalvo.com/uploads/img/large/67087-huawei-mate-70-pro.jpg"
+      },
+      {
+        "marca": "Huawei",
+        "nome": "Huawei Mate 70",
+        "ram": "12 GB",
+        "memoria": "512 GB",
+        "fotocamera": "50 MP doppia",
+        "frequenza": "120 Hz",
+        "prezzo": "€999",
+        "imgUrl": "https://sm.mashable.com/t/mashable_in/photo/default/untitled-design-20241108-111940-0000_e6ct.1248.jpg"
+      }
+    ];
 
     document.getElementById("formRegistrazione").addEventListener("submit", function(e) {
       e.preventDefault();
