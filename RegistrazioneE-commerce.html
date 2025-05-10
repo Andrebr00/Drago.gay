@@ -4,107 +4,108 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Registrazione</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
 
-  * {
-    box-sizing: border-box;
-  }
-
-  body {
-    font-family: 'Inter', sans-serif;
-    margin: 0;
-    padding: 2rem 1rem;
-    background-color: #f9fafb;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
-  }
-
-  h1 {
-    font-size: 1.8rem;
-    margin-bottom: 0.2rem;
-    color: #333;
-  }
-
-  h3 {
-    font-size: 1.1rem;
-    color: #666;
-    margin-bottom: 1.5rem;
-  }
-
-  form {
-    background-color: #ffffff;
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-    width: 100%;
-    max-width: 420px;
-  }
-
-  label {
-    display: block;
-    margin-bottom: 0.4rem;
-    font-size: 0.95rem;
-    color: #444;
-    font-weight: 600;
-  }
-
-  input[type="text"],
-  input[type="email"],
-  input[type="number"] {
-    width: 100%;
-    padding: 0.75rem;
-    margin-bottom: 1rem;
-    border: 1px solid #d1d5db;
-    border-radius: 8px;
-    font-size: 1rem;
-    background-color: #fdfdfd;
-    transition: border-color 0.2s ease;
-  }
-
-  input[type="text"]:focus,
-  input[type="email"]:focus,
-  input[type="number"]:focus {
-    border-color: #3b82f6;
-    outline: none;
-  }
-
-  input[type="submit"] {
-    background-color: #3b82f6;
-    color: white;
-    border: none;
-    padding: 0.75rem;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 1rem;
-    font-weight: 600;
-    transition: background-color 0.2s ease;
-  }
-
-  input[type="submit"]:hover {
-    background-color: #2563eb;
-  }
-
-  @media (max-width: 480px) {
-    body {
-      padding: 1rem;
+    * {
+      box-sizing: border-box;
     }
 
-    form {
-      padding: 1.5rem;
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 2rem 1rem;
+      background-color: #212121; /* Nero per il background */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
     }
 
     h1 {
-      font-size: 1.5rem;
+      font-size: 1.8rem;
+      margin-bottom: 0.2rem;
+      color: #FFA500; /* Arancione per il titolo */
     }
 
     h3 {
-      font-size: 1rem;
+      font-size: 1.1rem;
+      color: #FFA500;
+      margin-bottom: 1.5rem;
     }
-  }
-</style>
+
+    form {
+      background-color: #333333; /* Scuro per il form */
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+      width: 100%;
+      max-width: 420px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.4rem;
+      font-size: 0.95rem;
+      color: #FFA500; /* Arancione per i label */
+      font-weight: 600;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="number"] {
+      width: 100%;
+      padding: 0.75rem;
+      margin-bottom: 1rem;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 1rem;
+      background-color: #4b4b4b; /* Grigio scuro per il campo input */
+      color: white;
+      transition: border-color 0.2s ease;
+    }
+
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="number"]:focus {
+      border-color: #FFA500; /* Arancione per focus */
+      outline: none;
+    }
+
+    input[type="submit"] {
+      background-color: #FFA500; /* Arancione per il bottone */
+      color: white;
+      border: none;
+      padding: 0.75rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 600;
+      transition: background-color 0.2s ease;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #e67e00; /* Arancione più scuro al hover */
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 1rem;
+      }
+
+      form {
+        padding: 1.5rem;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      h3 {
+        font-size: 1rem;
+      }
+    }
+  </style>
 
 </head>
 <body>
@@ -261,36 +262,6 @@
         "frequenza": "120 Hz",
         "prezzo": "€1599",
         "imgUrl": "https://it.etoren.com/upload/images/0.60267800_1732846246_huawei-mate-70-rs-ultimate-5g-plu-al10-dual-sim-512gb-black-16gb-ram-china-version.jpg"
-      },
-      {
-        "marca": "Huawei",
-        "nome": "Huawei Mate 70 Pro+",
-        "ram": "16 GB",
-        "memoria": "512 GB",
-        "fotocamera": "50 MP tripla",
-        "frequenza": "120 Hz",
-        "prezzo": "€1399",
-        "imgUrl": "https://cdn.kalvo.com/uploads/img/large/67077-huawei-mate-70-pro-plus.jpg"
-      },
-      {
-        "marca": "Huawei",
-        "nome": "Huawei Mate 70 Pro",
-        "ram": "12 GB",
-        "memoria": "512 GB",
-        "fotocamera": "50 MP tripla",
-        "frequenza": "120 Hz",
-        "prezzo": "€1199",
-        "imgUrl": "https://cdn.kalvo.com/uploads/img/large/67087-huawei-mate-70-pro.jpg"
-      },
-      {
-        "marca": "Huawei",
-        "nome": "Huawei Mate 70",
-        "ram": "12 GB",
-        "memoria": "512 GB",
-        "fotocamera": "50 MP doppia",
-        "frequenza": "120 Hz",
-        "prezzo": "€999",
-        "imgUrl": "https://sm.mashable.com/t/mashable_in/photo/default/untitled-design-20241108-111940-0000_e6ct.1248.jpg"
       }
     ];
 
