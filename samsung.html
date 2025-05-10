@@ -3,26 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>samsung</title>
+  <title>Samsung</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       margin: 0;
-      background-color: #f0f0f0;
+      background-color: #000;
+      color: #fff;
     }
-    .cart-link {      
-      position: absolute;   
-      top: 10px;   
-      left: 10px;      
-      color: white;     
-      font-size: 16px;      
-      text-decoration: none;    
-      background-color: rgba(0,0,0,0.3);       
-      padding: 5px 10px;       
-      border-radius: 4px;    
-    }  
+
+    .cart-link {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      color: white;
+      font-size: 16px;
+      text-decoration: none;
+      background-color: rgba(255, 102, 0, 0.8);
+      padding: 6px 12px;
+      border-radius: 4px;
+      z-index: 1000;
+    }
+
     .header {
-      background-color: #90ee90;
+      background-color: #ff6600;
       color: white;
       text-align: center;
       padding: 20px;
@@ -42,35 +46,64 @@
       text-align: center;
       cursor: pointer;
       width: 200px;
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
+    }
+
+    .phone:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 10px #ff6600;
     }
 
     .phone img {
       width: 150px;
-      height: auto;
+      height: 150px;
+      object-fit: contain;
+      background-color: white;
+      border-radius: 10px;
     }
 
     .phone div {
       margin-top: 10px;
       font-weight: bold;
+      color: #ffcc99;
+    }
+
+    @media (max-width: 600px) {
+      .header {
+        font-size: 20px;
+        padding: 15px;
+      }
+
+      .cart-link {
+        font-size: 14px;
+        padding: 4px 8px;
+      }
+
+      .phone {
+        width: 150px;
+      }
+
+      .phone img {
+        width: 120px;
+        height: 120px;
+      }
     }
   </style>
 </head>
 <body>
-  <a href="Carrello.html" class="cart-link">Carrello</a> 
+  <a href="Carrello.html" class="cart-link">Carrello</a>
   <div class="header">
     Samsung
   </div>
 
-  <div class="phones-container" id="phonesContainer">
-   
-  </div>
+  <div class="phones-container" id="phonesContainer"></div>
 
   <script>
-    let telefoni = JSON.parse(localStorage.getItem('telefoni'));
+    let telefoni = JSON.parse(localStorage.getItem('telefoni')) || [];
     let phonesContainer = document.getElementById('phonesContainer');
-    let samsungPhones = telefoni.filter(function(t) { return t.marca === 'Samsung'; });
+    let samsungPhones = telefoni.filter(t => t.marca === 'Samsung');
 
-   samsungPhones.forEach(function(phone) {
+    samsungPhones.forEach(function(phone) {
       let phoneElement = document.createElement('div');
       phoneElement.classList.add('phone');
       phoneElement.setAttribute('onclick', 'vaiAllaPaginaTelefono("' + phone.nome + '")');
@@ -78,6 +111,9 @@
       let phoneImg = document.createElement('img');
       phoneImg.src = phone.imgUrl;
       phoneImg.alt = phone.nome;
+      phoneImg.onerror = function() {
+        this.src = 'images/placeholder.png';
+      };
 
       let phoneNome = document.createElement('div');
       phoneNome.innerText = phone.nome;
@@ -88,10 +124,10 @@
     });
 
     function vaiAllaPaginaTelefono(nomeTelefono) {
-      let telefono = telefoni.find(function(t) { return t.nome === nomeTelefono; });
+      let telefono = telefoni.find(t => t.nome === nomeTelefono);
       if (telefono) {
         localStorage.setItem('telefono', JSON.stringify(telefono));
-        window.location.href = 'Dettagli.html';  
+        window.location.href = 'Dettagli.html';
       }
     }
   </script>
