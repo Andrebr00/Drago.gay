@@ -1,94 +1,121 @@
-<!DOCTYPE html>
-<html lang="it">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dettagli Funko Pop</title>
-  <style>
-    body {
+<!DOCTYPE html> 
+<html>
+  <head>   
+  <meta charset="UTF-8">   
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">   
+  <title>Dettagli</title>   
+  <style>    
+    body {       
       font-family: Arial, sans-serif;
-      margin: 0;
-      background-color: #f0f0f0;
+      margin: 0;     
+      background-color: #f0f0f0;    
+      position: relative;   
+    }    
+    .cart-link {      
+      position: absolute;   
+      top: 10px;   
+      left: 10px;      
+      color: white;     
+      font-size: 16px;      
+      text-decoration: none;    
+      background-color: rgba(0,0,0,0.3);       
+      padding: 5px 10px;       
+      border-radius: 4px;    
+    }  
+    .header {       
+      background-color: #90ee90;     
+      color: white;      
+      text-align: center;       
+      padding: 20px;      
+      font-size: 24px;    
+      font-weight: bold;  
+      margin-top: 0;  
     }
-
-    .header {
-      background-color: #90ee90;
-      color: white;
-      text-align: center;
-      padding: 20px;
-      font-size: 24px;
-      font-weight: bold;
-    }
-
-    .details-container {
+    .product-container {
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 40px;
+      justify-content: space-between;    
+      padding: 30px; 
+      max-width: 1200px;    
+      margin: 0 auto;    
+    }   
+    .product-info { 
+      width: 45%;  
+    }     
+    .product-img {  
+      width: 45%;    
+    }     
+    .product-img img {  
+      width: 234px;     
+      height: 234px;    
+      object-fit: cover;   
+    }    
+    .product-info h2 {  
+      font-size: 24px;    
+    }    
+    .product-info p {  
+      font-size: 18px;    
+      margin: 10px 0;    
+    }     
+    .button-container {   
+      margin-top: 20px;    
     }
-
-    .details-container img {
-      width: 250px;
-      height: auto;
-      object-fit: contain;
-      margin-bottom: 20px;
-    }
-
-    .details-info {
-      background-color: white;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-      width: 100%;
-      max-width: 400px;
-    }
-
-    .details-info h2 {
-      margin-top: 0;
-    }
-
-    .details-info p {
-      margin: 10px 0;
-      font-size: 16px;
-    }
+    button { 
+      background-color: #28a745; 
+      color: white;  
+      border: none;  
+      padding: 10px 15px; 
+      border-radius: 5px;  
+      cursor: pointer;  
+      font-size: 16px;   
+      margin-right: 10px; 
+    } 
+    button:hover { 
+      background-color: #218838;   
+    }    
+    .return-button {   
+      background-color: #007bff; 
+    }    
+    .return-button:hover { 
+      background-color: #0056b3;  
+    }  
   </style>
 </head>
-<body>
-  <div class="header">
-    Dettagli Funko Pop
-  </div>
-
-  <div class="details-container" id="detailsContainer">
-    <!-- Dettagli caricati da JavaScript -->
-  </div>
-
-  <script>
-    let prodotto = JSON.parse(localStorage.getItem('prodotto'));
-    let detailsContainer = document.getElementById('detailsContainer');
-
-    if (prodotto) {
-      // immagine del Funko Pop
-      let productImg = document.createElement('img');
-      productImg.src = prodotto.imgUrl;
-      productImg.alt = prodotto.nome;
-
-      // informazioni dettagliate
-      let infoContainer = document.createElement('div');
-      infoContainer.classList.add('details-info');
-
-      infoContainer.innerHTML = `
-        <h2>${prodotto.nome}</h2>
-        <p><strong>Prezzo:</strong> €${prodotto.prezzo.toFixed(2)}</p>
-        <p><strong>Altezza:</strong> ${prodotto.altezza} cm</p>
-        <p><strong>Grado di esclusività:</strong> ${prodotto.esclusivita}</p>
-        <p><strong>Descrizione:</strong> ${prodotto.descrizione}</p>
-      `;
-
-      detailsContainer.appendChild(productImg);
-      detailsContainer.appendChild(infoContainer);
-    } else {
-      detailsContainer.innerHTML = '<p>Errore: prodotto non trovato.</p>';
-    }
-  </script>
-</body>
+  <body>
+    <a href="Carrello.html" class="cart-link">Carrello</a> 
+      <div class="header">Dettagli Telefono</div>   
+    <div class="product-container">     
+      <div class="product-info">    
+        <h2 id="phoneName"></h2>   
+        <p><strong>Marca:</strong> <span id="phoneBrand"></span></p>     
+        <p><strong>Prezzo:</strong> <span id="phonePrice"></span></p>    
+        <p><strong>Dettagli:</strong> <span id="phoneDetails"></span></p>     
+        <div class="button-container">   
+          <button id="addToCartBtn">Aggiungi al carrello</button>  
+          <button class="return-button" onclick="location.href='HomeE-commerce.html'">Ritorna alla Home</button>   
+        </div>   
+      </div> 
+      <div class="product-img">   
+        <img id="phoneImage" src="" alt="Immagine del telefono">  
+      </div>  
+    </div>  
+    <script>   
+      let telefono = JSON.parse(localStorage.getItem('telefono'));  
+      if (telefono) {      
+        document.getElementById('phoneName').innerText = telefono.nome;  
+        document.getElementById('phoneBrand').innerText = telefono.marca;   
+        document.getElementById('phonePrice').innerText = telefono.prezzo;    
+        document.getElementById('phoneDetails').innerText = 'RAM: ' + telefono.ram + ', Memoria: ' + telefono.memoria + ', Fotocamera: ' + telefono.fotocamera + ', Frequenza: ' + telefono.frequenza; 
+        document.getElementById('phoneImage').src = telefono.imgUrl;  
+      }  
+          document.getElementById('addToCartBtn').onclick = function() {
+       let carrello = JSON.parse(localStorage.getItem('carrello')) || [];
+       carrello.push(telefono);
+       localStorage.setItem('carrello', JSON.stringify(carrello));
+       let total = parseFloat(localStorage.getItem('totalCarrello')) || 0;
+       total += parseFloat(telefono.prezzo);
+       localStorage.setItem('totalCarrello', total);
+       alert('Prodotto aggiunto al carrello!');
+      };  
+    </script> 
+  </body> 
 </html>
