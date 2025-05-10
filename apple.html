@@ -3,116 +3,134 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>apple</title>
+  <title>Apple</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       margin: 0;
       background-color: #f0f0f0;
     }
-    .cart-link {      
-      position: absolute;   
-      top: 10px;   
-      left: 10px;      
-      color: white;     
-      font-size: 16px;      
-      text-decoration: none;    
-      background-color: rgba(0,0,0,0.3);       
-      padding: 5px 10px;       
-      border-radius: 4px;    
-    }  
-   .header {
-  background-color: #90ee90;
-  color: white;
-  text-align: center;
-  padding: 20px;
-  font-size: 24px;
-  font-weight: bold;
-}
 
-.phones-container {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 30px;
-  padding: 30px;
-}
+    .header {
+      background-color: #90ee90;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      font-size: 24px;
+      font-weight: bold;
+    }
 
-.phone {
-  text-align: center;
-  cursor: pointer;
-  width: 200px;
-}
+    .cart-link {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      color: white;
+      font-size: 16px;
+      text-decoration: none;
+      background-color: rgba(0, 0, 0, 0.3);
+      padding: 5px 10px;
+      border-radius: 4px;
+      z-index: 1000;
+    }
 
-.phone img {
-  width: 150px;
-  height: 150px;
-  object-fit: contain;
-  background-color: white;
-}
+    .phones-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+      padding: 30px;
+    }
 
-.phone div {
-  margin-top: 10px;
-  font-weight: bold;
-}
+    .phone {
+      text-align: center;
+      cursor: pointer;
+      width: 200px;
+      transition: transform 0.2s ease;
+    }
+
+    .phone:hover {
+      transform: scale(1.05);
+    }
+
+    .phone img {
+      width: 150px;
+      height: 150px;
+      object-fit: contain;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .phone div {
+      margin-top: 10px;
+      font-weight: bold;
+      font-size: 16px;
+      color: #333;
+    }
+
+    @media (max-width: 600px) {
+      .header {
+        font-size: 20px;
+        padding: 15px;
+      }
+
+      .phone {
+        width: 150px;
+      }
+
+      .phone img {
+        width: 120px;
+        height: 120px;
+      }
+
+      .cart-link {
+        font-size: 14px;
+        padding: 4px 8px;
+      }
+    }
   </style>
 </head>
 <body>
-  <a href="Carrello.html" class="cart-link">Carrello</a> 
-  <div class="header">
-    Apple
-  </div>
+  <a href="Carrello.html" class="cart-link">Carrello</a>
+  <div class="header">Apple</div>
 
-  <div class="phones-container" id="phonesContainer">
-   
-  </div>
+  <div class="phones-container" id="phonesContainer"></div>
 
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    let telefoni = JSON.parse(localStorage.getItem('telefoni')) || [];
-    let phonesContainer = document.getElementById('phonesContainer');
-    let applePhones = telefoni.filter(function(t) {
-      return t.marca === 'Apple';
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      let telefoni = JSON.parse(localStorage.getItem('telefoni')) || [];
+      let phonesContainer = document.getElementById('phonesContainer');
+      let applePhones = telefoni.filter(t => t.marca === 'Apple');
+
+      applePhones.forEach(phone => {
+        let phoneElement = document.createElement('div');
+        phoneElement.classList.add('phone');
+        phoneElement.setAttribute('onclick', 'vaiAllaPaginaTelefono("' + phone.nome + '")');
+
+        let phoneImg = document.createElement('img');
+        phoneImg.src = phone.imgUrl;
+        phoneImg.alt = phone.nome;
+        phoneImg.onerror = function() {
+          this.src = 'images/placeholder.png';
+        };
+
+        let phoneNome = document.createElement('div');
+        phoneNome.innerText = phone.nome;
+
+        phoneElement.appendChild(phoneImg);
+        phoneElement.appendChild(phoneNome);
+        phonesContainer.appendChild(phoneElement);
+      });
     });
 
-    applePhones.forEach(function(phone) {
-      let phoneElement = document.createElement('div');
-      phoneElement.classList.add('phone');
-      phoneElement.setAttribute('onclick', 'vaiAllaPaginaTelefono("' + phone.nome + '")');
-
-      let phoneImg = document.createElement('img');
-      phoneImg.src = phone.imgUrl;
-      phoneImg.alt = phone.nome;
-      phoneImg.onerror = function() {
-        this.src = 'images/placeholder.png';
-      };
-
-      let phoneNome = document.createElement('div');
-      phoneNome.innerText = phone.nome;
-
-      phoneElement.appendChild(phoneImg);
-      phoneElement.appendChild(phoneNome);
-      phonesContainer.appendChild(phoneElement);
-    });
-  });
-
-  function vaiAllaPaginaTelefono(nomeTelefono) {
-    let telefoni = JSON.parse(localStorage.getItem('telefoni')) || [];
-    for (let i = 0; i < telefoni.length; i++) {
-      if (telefoni[i].nome === nomeTelefono) {
-        localStorage.setItem('telefono', JSON.stringify(telefoni[i]));
+    function vaiAllaPaginaTelefono(nomeTelefono) {
+      let telefoni = JSON.parse(localStorage.getItem('telefoni')) || [];
+      let telefono = telefoni.find(t => t.nome === nomeTelefono);
+      if (telefono) {
+        localStorage.setItem('telefono', JSON.stringify(telefono));
         window.location.href = 'Dettagli.html';
-        break;
       }
     }
-  }
-</script>
-
+  </script>
 </body>
 </html>
-
-
-
-
-    
-   
