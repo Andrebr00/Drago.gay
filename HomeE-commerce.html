@@ -3,170 +3,156 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HomeE-commerce</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+  <title>Home E-commerce</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
 
-  * {
-    box-sizing: border-box;
-  }
-
-  body {
-    font-family: 'Inter', sans-serif;
-    margin: 0;
-    background-color: #111;
-    color: white;
-  }
-
-  .header {
-    background-color: #ff6b00;
-    color: white;
-    text-align: center;
-    padding: 1.5rem 1rem;
-    font-size: 1.8rem;
-    font-weight: 700;
-    position: relative;
-  }
-
-  .cart-link {
-    position: absolute;
-    top: 15px;
-    left: 15px;
-    color: white;
-    font-size: 14px;
-    text-decoration: none;
-    background-color: rgba(0,0,0,0.5);
-    padding: 8px 12px;
-    border-radius: 5px;
-    font-weight: 600;
-    transition: background-color 0.2s ease;
-  }
-
-  .cart-link:hover {
-    background-color: rgba(0,0,0,0.8);
-  }
-
-  .header span {
-    font-weight: 400;
-    font-size: 1.3rem;
-    display: block;
-    margin-top: 0.3rem;
-  }
-
-  .marche-container {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 40px;
-    padding: 40px 20px;
-  }
-
-  .marca {
-    text-align: center;
-    cursor: pointer;
-    transition: transform 0.2s ease;
-    background-color: #1c1c1c;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 0 10px rgba(255, 107, 0, 0.2);
-  }
-
-  .marca:hover {
-    transform: scale(1.08);
-    box-shadow: 0 0 18px rgba(255, 107, 0, 0.5);
-  }
-
-  .marca img {
-    width: 100px;
-    height: 100px;
-    object-fit: contain;
-    margin-bottom: 10px;
-    filter: brightness(0) invert(1);
-  }
-
-  .marca div {
-    color: #ff6b00;
-    font-weight: 700;
-    font-size: 1.1rem;
-  }
-
-  @media (max-width: 600px) {
-    .header {
-      font-size: 1.5rem;
+    * {
+      box-sizing: border-box;
     }
 
-    .header span {
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 2rem 1rem;
+      background-color: #f9fafb;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 0.2rem;
+      color: #333;
+    }
+
+    h3 {
+      font-size: 1.1rem;
+      color: #666;
+      margin-bottom: 1.5rem;
+    }
+
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+
+    .card {
+      background-color: #ffffff;
+      padding: 1rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+      width: 250px;
+      text-align: center;
+    }
+
+    .card img {
+      max-width: 100%;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+
+    .card h4 {
+      font-size: 1.2rem;
+      color: #333;
+      margin-bottom: 0.5rem;
+    }
+
+    .card p {
       font-size: 1rem;
+      color: #666;
+      margin-bottom: 1rem;
     }
 
-    .marca {
-      padding: 15px;
+    .card .price {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 1rem;
     }
 
-    .marca img {
-      width: 80px;
-      height: 80px;
-    }
-  }
-</style>
-
-</head>
-<body>
-  <a href="Carrello.html" class="cart-link">Carrello</a> 
-  <div class="header">
-    Benvenuto <span id="nomeUtente"></span>
-  </div>
-
-  <div class="marche-container" id="marcheContainer">
-  </div>
-
-
-  <script>
-    let userData = JSON.parse(localStorage.getItem('datiUtente'));
-    let telefoni = JSON.parse(localStorage.getItem('telefoni'));
-
-    if (userData && userData.nome) {
-      document.getElementById('nomeUtente').innerText = userData.nome;
+    .card button {
+      background-color: #3b82f6;
+      color: white;
+      border: none;
+      padding: 0.75rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 600;
+      transition: background-color 0.2s ease;
     }
 
-    let marche = [];
-    for (let i = 0; i < telefoni.length; i++) {
-      if (marche.indexOf(telefoni[i].marca) === -1) {
-        marche.push(telefoni[i].marca);
+    .card button:hover {
+      background-color: #2563eb;
+    }
+
+    .cart-button {
+      background-color: #2563eb;
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1.2rem;
+      font-weight: 600;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .cart-button:hover {
+      background-color: #1d4ed8;
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 1rem;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      h3 {
+        font-size: 1rem;
+      }
+
+      .card {
+        width: 100%;
       }
     }
+  </style>
+</head>
+<body>
+  <h1>ActionVerse</h1>
+  <h3>Scopri i nostri prodotti</h3>
 
-    let marcheContainer = document.getElementById('marcheContainer');
-    let marcheImages = {
-      "Apple":   "https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg",
-      "Samsung": "https://images.samsung.com/is/image/samsung/assets/global/about-us/brand/logo/mo/256_144_2.png?$512_N_PNG$",
-      "Xiaomi":  "https://e7.pngegg.com/pngimages/234/461/png-clipart-xiaomi-mi-1-graphics-logo-xiaomi-logo-text-trademark-thumbnail.png",
-      "Huawei":  "https://1000logos.net/wp-content/uploads/2018/08/Huawei-Logo.png"
-    };
+  <div class="card-container">
+    <div class="card">
+      <img src="https://img.tuttoandroid.net/wp-content/uploads/2025/01/Samsung-Galaxy-S25-Ultra-tag.png" alt="Samsung Galaxy S25 Ultra">
+      <h4>Samsung Galaxy S25 Ultra</h4>
+      <p>12 GB RAM, 512 GB Memoria</p>
+      <p>Fotocamera 200 MP</p>
+      <div class="price">€1619</div>
+      <button>Aggiungi al carrello</button>
+    </div>
+    <!-- Altri prodotti qui -->
+  </div>
 
-    for (let j = 0; j < marche.length; j++) {
-      let marca = marche[j];
+  <button class="cart-button">Visualizza Carrello</button>
 
-      let marcaElement = document.createElement('div');
-      marcaElement.classList.add('marca');
-      marcaElement.setAttribute('onclick', 'vaiAllaMarca("' + marca + '")');
-
-      let marcaImg = document.createElement('img');
-      marcaImg.src = marcheImages[marca];
-      marcaImg.alt = marca;
-
-      let marcaNome = document.createElement('div');
-      marcaNome.innerText = marca;
-
-      marcaElement.appendChild(marcaImg);
-      marcaElement.appendChild(marcaNome);
-      marcheContainer.appendChild(marcaElement);
-    }
-
-    function vaiAllaMarca(marca) {
-      localStorage.setItem('marca', marca);
-      window.location.href = marca.toLowerCase() + '.html';
-    }
+  <script>
+    document.querySelector('.cart-button').addEventListener('click', function() {
+      // Logica per visualizzare il carrello
+      alert('Visualizza il carrello');
+    });
   </script>
 </body>
 </html>
