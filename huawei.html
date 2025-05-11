@@ -3,26 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>huawei</title>
+  <title>Huawei</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       margin: 0;
-      background-color: #f0f0f0;
+      background-color: #121212; /* sfondo nero */
+      color: white; /* testo bianco */
     }
+
     .cart-link {      
       position: absolute;   
       top: 10px;   
-      left: 10px;      
+      right: 10px;      
       color: white;     
       font-size: 16px;      
       text-decoration: none;    
-      background-color: rgba(0,0,0,0.3);       
-      padding: 5px 10px;       
-      border-radius: 4px;    
-    }  
+      background-color: #333;       
+      padding: 5px 12px;       
+      border-radius: 4px;
+      transition: background-color 0.3s, box-shadow 0.3s;
+    }
+
+    .cart-link:hover {
+      background-color: #ff6600;
+      box-shadow: 0 0 10px #ff6600;
+    }
+
     .header {
-      background-color: #90ee90;
+      background-color: #ff6600; /* arancione */
       color: white;
       text-align: center;
       padding: 20px;
@@ -42,23 +51,34 @@
       text-align: center;
       cursor: pointer;
       width: 200px;
+      padding: 15px;
+      background-color: #1e1e1e;
+      border-radius: 8px;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .phone:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px #ff6600;
     }
 
     .phone img {
       width: 150px;
       height: auto;
+      border-radius: 6px;
     }
 
     .phone div {
       margin-top: 10px;
       font-weight: bold;
+      color: #ff6600;
     }
   </style>
 </head>
 <body>
   <a href="Carrello.html" class="cart-link">Carrello</a> 
   <div class="header">
-   Huawei
+    Huawei
   </div>
 
   <div class="phones-container" id="phonesContainer">
