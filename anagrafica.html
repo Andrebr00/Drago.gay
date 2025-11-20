@@ -1,0 +1,33 @@
+// Seleziono il corpo della tabella
+const tbody = document.querySelector("#tabellaPersone tbody");
+
+// Creo la richiesta
+const xhr = new XMLHttpRequest();
+xhr.open("GET", "people.json", true);
+
+// Gestione della risposta
+xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+        
+        // Converto da JSON → array JS
+        const persone = JSON.parse(xhr.responseText);
+
+        // Per ogni oggetto creo una riga
+        persone.forEach(p => {
+            let tr = document.createElement("tr");
+
+            tr.innerHTML = `
+                <td>${p.nome}</td>
+                <td>${p.cognome}</td>
+                <td>${p.indirizzo}</td>
+                <td>${p.citta}</td>
+                <td>${p.cap}</td>
+            `;
+
+            tbody.appendChild(tr);
+        });
+    }
+};
+
+// Invio della richiesta
+xhr.send();
