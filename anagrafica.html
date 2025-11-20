@@ -1,4 +1,46 @@
-// Seleziono il corpo della tabella
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Elenco Persone</title>
+    <style>
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            font-family: Arial;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #333;
+            text-align: center;
+        }
+        th {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+
+    <h1 style="text-align:center;">Elenco Persone (da JSON)</h1>
+
+    <table id="tabellaPersone">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Cognome</th>
+                <th>Indirizzo</th>
+                <th>Città</th>
+                <th>CAP</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Qui verranno inserite le righe -->
+        </tbody>
+    </table>
+
+    <script src="script.js">
+        // Seleziono il corpo della tabella
 const tbody = document.querySelector("#tabellaPersone tbody");
 
 // Creo la richiesta
@@ -31,3 +73,7 @@ xhr.onreadystatechange = function () {
 
 // Invio della richiesta
 xhr.send();
+
+    </script>
+</body>
+</html>
