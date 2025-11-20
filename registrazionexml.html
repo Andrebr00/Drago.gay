@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registrazione</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+    * { box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 2rem 1rem;
+      background-color: #212121;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    h1 { font-size: 1.8rem; margin-bottom: 0.2rem; color: #FFA500; }
+    h3 { font-size: 1.1rem; color: #FFA500; margin-bottom: 1.5rem; }
+
+    form {
+      background-color: #333;
+      padding: 2rem;
+      border-radius: 12px;
+      max-width: 420px;
+      width: 100%;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.4rem;
+      font-size: 0.95rem;
+      color: #FFA500;
+      font-weight: 600;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="number"] {
+      width: 100%;
+      padding: 0.75rem;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      border: 1px solid #d1d5db;
+      background: #4b4b4b;
+      color: white;
+    }
+
+    input[type="submit"] {
+      background-color: #FFA500;
+      color: white;
+      border: none;
+      padding: 0.75rem;
+      width: 100%;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>ActionVerse</h1>
+  <h3>Registrati</h3>
+
+  <form id="formRegistrazione">
+    <label>Nome</label>
+    <input type="text" id="nome" required>
+
+    <label>Cognome</label>
+    <input type="text" id="cognome" required>
+
+    <label>E-mail</label>
+    <input type="email" id="email" required>
+
+    <label>Indirizzo</label>
+    <input type="text" id="indirizzo" required>
+
+    <label>Età</label>
+    <input type="number" id="eta" required>
+
+    <input type="submit" value="Registrati">
+  </form>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+      // CARICAMENTO XML CON XHR
+      const xhr = new XMLHttpRequest();
+      xhr.open("GET", "catalogo.xml", true);
+
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          const xml = xhr.responseXML;
+          const telefoniXML = xml.getElementsByTagName("telefono");
+
+          let telefoni = [];
+
+          for (let tel of telefoniXML) {
+            telefoni.push({
+              marca: tel.getElementsByTagName("marca")[0].textContent,
+              nome: tel.getElementsByTagName("nome")[0].textContent,
+              ram: tel.getElementsByTagName("ram")[0].textContent,
+              memoria: tel.getElementsByTagName("memoria")[0].textContent,
+              fotocamera: tel.getElementsByTagName("fotocamera")[0].textContent,
+              frequenza: tel.getElementsByTagName("frequenza")[0].textContent,
+              prezzo: tel.getElementsByTagName("prezzo")[0].textContent,
+              imgUrl: tel.getElementsByTagName("imgUrl")[0].textContent
+            });
+          }
+
+          localStorage.setItem("telefoni", JSON.stringify(telefoni));
+        }
+      };
+
+      xhr.send();
+
+      // REGISTRAZIONE UTENTE
+      document.getElementById("formRegistrazione").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const datiUtente = {
+          nome: document.getElementById("nome").value,
+          cognome: document.getElementById("cognome").value,
+          email: document.getElementById("email").value,
+          indirizzo: document.getElementById("indirizzo").value,
+          eta: document.getElementById("eta").value
+        };
+
+        localStorage.setItem("datiUtente", JSON.stringify(datiUtente));
+
+        window.location.href = "HomE-commerce.html";
+      });
+    });
+  </script>
+
+</body>
+</html>
