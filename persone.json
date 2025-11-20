@@ -1,0 +1,34 @@
+[
+  {
+    "nome": "Andrea",
+    "cognome": "Bergamaschi",
+    "data": "2007-08-31",
+    "indirizzo": "Via Novara 26",
+    "citta": "Pregnana city",
+    "cap": "20006"
+  },
+  {
+    "nome": "Jacopo",
+    "cognome": "Pesare",
+    "data": "2007-04-19",
+    "indirizzo": "Via Gallarate 69",
+    "citta": "Pregnana beach",
+    "cap": "20006"
+  },
+  {
+    "nome": "Zio",
+    "cognome": "Walter",
+    "data": "1945-06-27",
+    "indirizzo": "Via Re di Puglia 7",
+    "citta": "Pregnana trojage",
+    "cap": "20006"
+  },
+  {
+    "nome": "Marco",
+    "cognome": "Soldi",
+    "data": "1980-09-11",
+    "indirizzo": "Via dalle palle 15",
+    "citta": "Oceano <Svizzera>",
+    "cap": "50100"
+  }
+]
