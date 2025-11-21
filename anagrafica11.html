@@ -2,100 +2,101 @@
 <html>
 <head>
   <title>AnagraficaXLMavanzata</title>
+
   <style>
     body {
-  font-family: "Segoe UI", Arial, sans-serif;
-  background: linear-gradient(135deg, #e9f1ff, #f7faff);
-  margin: 0;
-  padding: 0;
-  text-align: center;
-  color: #2d3e50;
-}
+      font-family: "Segoe UI", Arial, sans-serif;
+      background-color: #0e0e0e;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      color: #ffffff;
+    }
 
-/* Header */
-h2 {
-  background: #1d4e89;
-  color: white;
-  padding: 20px;
-  margin: 0;
-  font-size: 28px;
-  font-weight: 600;
-  letter-spacing: 1px;
-  border-bottom: 5px solid #163b66;
-}
+    h2 {
+      background: #111111;
+      color: white;
+      padding: 20px;
+      margin: 0;
+      font-size: 28px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      border-bottom: 4px solid #ff7b00;
+    }
 
-/* Containers */
-.container {
-  margin: 25px auto;
-}
+    .container {
+      margin: 25px auto;
+    }
 
-/* Buttons + Inputs */
-button, select, input[type="text"] {
-  background-color: #1d4e89;
-  color: white;
-  border: none;
-  padding: 12px 25px;
-  border-radius: 10px;
-  cursor: pointer;
-  margin: 6px;
-  font-size: 16px;
-  transition: 0.25s ease;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-}
+    button, select, input[type="text"] {
+      background-color: #ff7b00;
+      color: black;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 10px;
+      cursor: pointer;
+      margin: 6px;
+      font-size: 16px;
+      transition: 0.25s ease;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+      font-weight: bold;
+    }
 
-button:hover, select:hover {
-  background-color: #163b66;
-  transform: translateY(-2px);
-}
+    button:hover, select:hover {
+      background-color: #ffa43c;
+      transform: translateY(-2px);
+    }
 
-input[type="text"], select {
-  background-color: #ffffff;
-  color: #2d3e50;
-  border: 2px solid #1d4e89;
-  padding: 10px 12px;
-  border-radius: 8px;
-  width: 220px;
-}
+    input[type="text"], select {
+      background-color: #1a1a1a;
+      color: white;
+      border: 2px solid #ff7b00;
+      padding: 10px 12px;
+      border-radius: 8px;
+      width: 220px;
+    }
 
-/* Table */
-table {
-  border-collapse: collapse;
-  width: 85%;
-  margin: 25px auto;
-  background: white;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-  border-radius: 12px;
-  overflow: hidden;
-}
+    table {
+      border-collapse: collapse;
+      width: 85%;
+      margin: 25px auto;
+      background: #1a1a1a;
+      color: white;
+      box-shadow: 0 4px 15px rgba(255,123,0,0.3);
+      border-radius: 12px;
+      overflow: hidden;
+    }
 
-th {
-  background: #1d4e89;
-  color: white;
-  padding: 14px;
-  font-size: 17px;
-}
+    th {
+      background: #ff7b00;
+      color: black;
+      padding: 14px;
+      font-size: 17px;
+      font-weight: bold;
+    }
 
-td {
-  padding: 12px;
-  border-bottom: 1px solid #dce3ef;
-}
+    td {
+      padding: 12px;
+      border-bottom: 1px solid #333333;
+    }
 
-tr:nth-child(even) {
-  background-color: #f0f4fb;
-}
+    tr:nth-child(even) {
+      background-color: #141414;
+    }
 
-tr:hover {
-  background-color: #e0e9f8;
-  transition: 0.2s;
-}
+    tr:hover {
+      background-color: #262626;
+      transition: 0.2s;
+    }
 
-#messaggio {
-  color: #d63333;
-  font-weight: bold;
-  margin-top: 10px;
-}
+    #messaggio {
+      color: #ff7b00;
+      font-weight: bold;
+      margin-top: 10px;
+    }
 
   </style>
+
 </head>
 <body>
 
@@ -127,24 +128,19 @@ tr:hover {
   <script>
     let datiPersone = [];
 
-    document.getElementById("caricaDati").addEventListener("click", function() {
-      const xhr = new XMLHttpRequest();
+    document.getElementById("caricaDati").addEventListener("click", caricaPersoneDalFile);
+
+    function caricaPersoneDalFile() {
+      let xhr = new XMLHttpRequest();
       xhr.open("GET", "persone.json", true);
+
       xhr.onreadystatechange = function() {
         if (xhr.readyState === 4) {
           if (xhr.status === 200) {
             try {
               datiPersone = JSON.parse(xhr.responseText);
               document.getElementById("messaggio").innerHTML = "File persone.json caricato correttamente";
-
-              let selezioneData = document.getElementById("dataSelezionata");
-              selezioneData.innerHTML = '<option value="">Seleziona una data di nascita</option>';
-              for (let i = 0; i < datiPersone.length; i++) {
-                let opzione = document.createElement("option");
-                opzione.value = datiPersone[i].data;
-                opzione.textContent = datiPersone[i].data + " - " + datiPersone[i].cognome + " " + datiPersone[i].nome;
-                selezioneData.appendChild(opzione);
-              }
+              riempiSelectDate();
             } catch (errore) {
               document.getElementById("messaggio").innerHTML = "Errore: il file JSON non è valido.";
             }
@@ -153,31 +149,52 @@ tr:hover {
           }
         }
       };
-      xhr.send();
-    });
 
-    document.getElementById("creaTabella").addEventListener("click", function() {
-      const tabella = document.getElementById("tabella");
+      xhr.send();
+    }
+
+    function riempiSelectDate() {
+      let selezioneData = document.getElementById("dataSelezionata");
+      selezioneData.innerHTML = '<option value="">Seleziona una data di nascita</option>';
+
+      for (let i = 0; i < datiPersone.length; i++) {
+        let opzione = document.createElement("option");
+        opzione.value = datiPersone[i].data;
+        opzione.textContent = datiPersone[i].data + " - " + datiPersone[i].cognome + " " + datiPersone[i].nome;
+        selezioneData.appendChild(opzione);
+      }
+    }
+
+    document.getElementById("creaTabella").addEventListener("click", creaTabellaCompleta);
+
+    function creaTabellaCompleta() {
+      let tabella = document.getElementById("tabella");
+
       if (datiPersone.length === 0) {
         document.getElementById("messaggio").innerHTML = "Prima carica i dati.";
         return;
       }
+
       let tab = "<tr><th>Nome</th><th>Cognome</th><th>Data</th><th>Indirizzo</th><th>Città</th><th>CAP</th></tr>";
+
       for (let i = 0; i < datiPersone.length; i++) {
         tab += "<tr>" +
-                  "<td>" + datiPersone[i].nome + "</td>" +
-                  "<td>" + datiPersone[i].cognome + "</td>" +
-                  "<td>" + datiPersone[i].data + "</td>" +
-                  "<td>" + datiPersone[i].indirizzo + "</td>" +
-                  "<td>" + datiPersone[i].citta + "</td>" +
-                  "<td>" + datiPersone[i].cap + "</td>" +
-               "</tr>";
+                "<td>" + datiPersone[i].nome + "</td>" +
+                "<td>" + datiPersone[i].cognome + "</td>" +
+                "<td>" + datiPersone[i].data + "</td>" +
+                "<td>" + datiPersone[i].indirizzo + "</td>" +
+                "<td>" + datiPersone[i].citta + "</td>" +
+                "<td>" + datiPersone[i].cap + "</td>" +
+              "</tr>";
       }
+
       tabella.innerHTML = tab;
       document.getElementById("messaggio").innerHTML = "Tabella creata con successo";
-    });
+    }
 
-    document.getElementById("bottoneCerca").onclick = function() {
+    document.getElementById("bottoneCerca").onclick = cercaPerLettera;
+
+    function cercaPerLettera() {
       let lettera = document.getElementById("letteraInserita").value.toUpperCase();
       let tabella = document.getElementById("tabella");
 
@@ -186,7 +203,12 @@ tr:hover {
         return;
       }
 
-      let risultati = datiPersone.filter(p => p.cognome.toUpperCase().startsWith(lettera));
+      let risultati = [];
+      for (let i = 0; i < datiPersone.length; i++) {
+        if (datiPersone[i].cognome.toUpperCase().startsWith(lettera)) {
+          risultati.push(datiPersone[i]);
+        }
+      }
 
       if (risultati.length === 0) {
         document.getElementById("messaggio").innerHTML = "Nessun cognome trovato con la lettera " + lettera;
@@ -195,23 +217,27 @@ tr:hover {
       }
 
       let tab = "<tr><th>Nome</th><th>Cognome</th><th>Data</th><th>Indirizzo</th><th>Città</th><th>CAP</th></tr>";
-      for (let i = 0; i < risultati.length; i++) {
+
+      for (let j = 0; j < risultati.length; j++) {
         tab += "<tr>" +
-                  "<td>" + risultati[i].nome + "</td>" +
-                  "<td>" + risultati[i].cognome + "</td>" +
-                  "<td>" + risultati[i].data + "</td>" +
-                  "<td>" + risultati[i].indirizzo + "</td>" +
-                  "<td>" + risultati[i].citta + "</td>" +
-                  "<td>" + risultati[i].cap + "</td>" +
-               "</tr>";
+                "<td>" + risultati[j].nome + "</td>" +
+                "<td>" + risultati[j].cognome + "</td>" +
+                "<td>" + risultati[j].data + "</td>" +
+                "<td>" + risultati[j].indirizzo + "</td>" +
+                "<td>" + risultati[j].citta + "</td>" +
+                "<td>" + risultati[j].cap + "</td>" +
+              "</tr>";
       }
 
       tabella.innerHTML = tab;
       document.getElementById("messaggio").innerHTML = "Risultati per la lettera: " + lettera;
-    };
+    }
 
-    document.getElementById("bottoneGenerazione").onclick = function() {
+    document.getElementById("bottoneGenerazione").onclick = mostraGenerazione;
+
+    function mostraGenerazione() {
       let dataInserita = document.getElementById("dataSelezionata").value;
+
       if (dataInserita === "") {
         document.getElementById("risultatoGenerazione").innerHTML = "Seleziona una data.";
         return;
@@ -231,7 +257,8 @@ tr:hover {
 
       document.getElementById("risultatoGenerazione").innerHTML =
         "Appartiene alla " + generazione;
-    };
+    }
   </script>
+
 </body>
 </html>
